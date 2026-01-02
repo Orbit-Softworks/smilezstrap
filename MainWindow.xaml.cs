@@ -21,6 +21,7 @@ namespace SmilezStrap
     {
         private static readonly string VERSION = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.43";
         private const string GITHUB_REPO = "Orbit-Softworks/SmilezStrap";
+        private const string FFLAG_GITHUB_REPO = "Orbit-Softworks/SmilezStrap-FFlag-Injector";
         private readonly HttpClient httpClient = new HttpClient();
         
         private string? appDataPath;
@@ -589,6 +590,14 @@ namespace SmilezStrap
             progressWindow.Show();
         }
 
+        private async void LaunchFFlag_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            var progressWindow = new ProgressWindow(false, config, null, true);
+            progressWindow.Closed += (s, args) => this.Show();
+            progressWindow.Show();
+        }
+
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -842,5 +851,6 @@ namespace SmilezStrap
         public bool VREnabled { get; set; } = true;
         public bool SetAsReadOnly { get; set; } = false;
         public bool AutoCheckUpdates { get; set; } = true;
+        public string FFlagInjectorVersion { get; set; } = string.Empty;
     }
 }
